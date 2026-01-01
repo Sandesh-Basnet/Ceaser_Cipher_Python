@@ -3,7 +3,6 @@ def welcome():# Function to display a welcome message
     print("This program allows you to encrypt and decrypt messages using the Caesar cipher technique.")
     print("You can choose to shift letters by a specified number to encode or decode your messages.")
     print("Let's get started!")
-welcome()
 def enter_message():# Function to get user input for mode, message, and shift number
     mode = input("Enter 'e' to encrypt or 'd' to decrypt a message: ").lower()
     while mode not in ['e', 'd']:# Validate mode input
@@ -15,7 +14,6 @@ def enter_message():# Function to get user input for mode, message, and shift nu
         print("Invalid shift number. Please enter a number between 1 and 25.")
         shift = int(input("Enter the shift number (1-25): "))
     return mode, message, shift#Returns user inputs for further processing
-mode,message,shift = enter_message()# Unpack the returned values from enter_message function
 letters = 'abcdefghijklmnopqrstuvwxyz'# String containing all lowercase letters for reference
 def encrypt(message,shift):# Function to encrypt the message using Caesar cipher technique
     ciphertext = ''
@@ -30,4 +28,16 @@ def encrypt(message,shift):# Function to encrypt the message using Caesar cipher
                     new_index -= 26# Adjust new index to stay within bounds
                 ciphertext += letters[new_index]# Append the shifted letter to ciphertext
     return ciphertext
-print(encrypt(message,shift))
+def decrypt(message,shift):
+    plaintext =''
+    for letter in message:
+        if not letter == ' ':
+            index = letters.find(letter)
+            if index == -1:
+                plaintext +=letter
+            else:
+                new_index = index -shift
+                if new_index <0:
+                    new_index += 26
+                plaintext += letters[new_index]
+    return plaintext
