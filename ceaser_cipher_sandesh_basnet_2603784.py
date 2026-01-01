@@ -28,16 +28,16 @@ def encrypt(message,shift):# Function to encrypt the message using Caesar cipher
                     new_index -= 26# Adjust new index to stay within bounds
                 ciphertext += letters[new_index]# Append the shifted letter to ciphertext
     return ciphertext
-def decrypt(message,shift):
+def decrypt(message,shift):# Function to decrypt the message using Caesar cipher technique
     plaintext =''
-    for letter in message:
-        if not letter == ' ':
-            index = letters.find(letter)
-            if index == -1:
+    for letter in message:# Iterate through each letter in the message
+        if not letter == ' ':# Check if the letter is not a space
+            index = letters.find(letter)# Find the index of the letter in the letters string
+            if index == -1:# If letter is not found in letters string, keep it unchanged
                 plaintext +=letter
-            else:
-                new_index = index -shift
-                if new_index <0:
-                    new_index += 26
-                plaintext += letters[new_index]
+            else:# If letter is found, perform the reverse shift operation
+                new_index = index -shift# Calculate new index after reversing the shift
+                if new_index <0:# Wrap around if new index is negative
+                    new_index += 26# Adjust new index to stay within bounds
+                plaintext += letters[new_index]# Append the shifted letter to plaintext
     return plaintext
