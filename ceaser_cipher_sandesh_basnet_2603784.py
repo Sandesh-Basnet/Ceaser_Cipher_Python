@@ -42,13 +42,21 @@ def decrypt(message,shift):# Function to decrypt the message using Caesar cipher
                     new_index += 26# Adjust new index to stay within bounds
                 plaintext += letters[new_index]# Append the shifted letter to plaintext
     return plaintext
-def main():# Main function to run the Caesar cipher program
-    welcome()# Display welcome message
-    mode, message, shift = enter_message()# Get user inputs
-    if mode == 'e':# If mode is encryption
-        encrypted_message = encrypt(message, shift)# Encrypt the message
-        print("Encrypted Message:", encrypted_message.upper())# Display encrypted message in uppercase
-    elif mode == 'd':# If mode is decryption
-        decrypted_message = decrypt(message, shift)# Decrypt the message
-        print("Decrypted Message:", decrypted_message.upper())# Display decrypted message in uppercase
+def main():
+    first_run = True
+    while True:
+        if first_run == True:
+            welcome()
+            first_run = False
+        mode, message, shift = enter_message()
+        if mode == 'e':
+            encrypted_message = encrypt(message, shift)
+            print("Encrypted Message:", encrypted_message.upper())
+        elif mode == 'd':
+            decrypted_message = decrypt(message, shift)
+            print("Decrypted Message:", decrypted_message.upper())
+        choice = input("Do you want to continue? (y/n): ").lower()
+        if choice != 'y':
+            print("Exiting program.")
+            break
 main()
