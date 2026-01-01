@@ -29,6 +29,7 @@ def encrypt(message,shift):# Function to encrypt the message using Caesar cipher
                 ciphertext += letters[new_index]# Append the shifted letter to ciphertext
     return ciphertext
 def decrypt(message,shift):# Function to decrypt the message using Caesar cipher technique
+    letters = 'abcdefghijklmnopqrstuvwxyz'# String containing all lowercase letters for reference
     plaintext =''
     for letter in message:# Iterate through each letter in the message
         if not letter == ' ':# Check if the letter is not a space
