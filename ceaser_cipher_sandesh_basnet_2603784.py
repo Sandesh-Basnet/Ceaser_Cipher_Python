@@ -8,7 +8,7 @@ def enter_message():# Function to get user input for mode, message, and shift nu
     while mode not in ['e', 'd']:# Validate mode input
         print("Invalid input. Please enter 'e' for encrypt or 'd' for decrypt.")
         mode = input("Enter 'e' to encrypt or 'd' to decrypt a message: ").lower()
-    message = input("Enter your message: ")
+    message = input("Enter your message: ").lower()# Get message input and convert to lowercase
     shift = int(input("Enter the shift number (1-25): "))
     while shift < 1 or shift > 25:# Validate shift input
         print("Invalid shift number. Please enter a number between 1 and 25.")
@@ -41,3 +41,13 @@ def decrypt(message,shift):# Function to decrypt the message using Caesar cipher
                     new_index += 26# Adjust new index to stay within bounds
                 plaintext += letters[new_index]# Append the shifted letter to plaintext
     return plaintext
+def main():# Main function to run the Caesar cipher program
+    welcome()# Display welcome message
+    mode, message, shift = enter_message()# Get user inputs
+    if mode == 'e':# If mode is encryption
+        encrypted_message = encrypt(message, shift)# Encrypt the message
+        print("Encrypted Message:", encrypted_message.upper())# Display encrypted message in uppercase
+    elif mode == 'd':# If mode is decryption
+        decrypted_message = decrypt(message, shift)# Decrypt the message
+        print("Decrypted Message:", decrypted_message.upper())# Display decrypted message in uppercase
+main()
