@@ -14,8 +14,8 @@ def enter_message():# Function to get user input for mode, message, and shift nu
         print("Invalid shift number. Please enter a number between 1 and 25.")
         shift = int(input("Enter the shift number (1-25): "))
     return mode, message, shift#Returns user inputs for further processing
-letters = 'abcdefghijklmnopqrstuvwxyz'# String containing all lowercase letters for reference
 def encrypt(message,shift):# Function to encrypt the message using Caesar cipher technique
+    letters = 'abcdefghijklmnopqrstuvwxyz'# String containing all lowercase letters for reference
     ciphertext = ''
     for letter in message:# Iterate through each letter in the message
         if not letter == ' ':# Check if the letter is not a space
