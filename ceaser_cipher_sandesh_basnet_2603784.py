@@ -47,19 +47,70 @@ def decrypt(message,shift):# Function to decrypt the message using Caesar cipher
                     new_index += 26# Adjust new index to stay within bounds
                 plaintext += letters[new_index]# Append the shifted letter to plaintext
     return plaintext
+def is_file(filename):
+    try:
+        with open (filename, 'r'):
+            return True
+    except:
+        return False
+def file_process(filename, mode, shift):
+    results = []
+    with open (filename, 'r') as file:
+        for line in file:
+            line = line.strip().lower()
+            if mode == 'e':
+                results.append(encrypt(line,shift).upper())
+            elif mode == 'd':
+                results.append(decrypt(line,shift).upper())
+    return results
+def write_message(messages):
+    with open ('results.txt','w') as file:
+        for message in messages:
+            file.write(message + '\n')
+def message_or_file():
+    mode = input('Would you like to encrypt (e) or decrypt (d):').lower()
+    while mode not in ['e','d']:
+        print("Invalid input. Please enter 'e' for encrypt or 'd' for decrypt.")
+        mode = input('Would you like to encrypt (e) or decrypt (d):').lower()
+    choice = input("Would you like to read from file (f) or console (c):").lower()
+    while choice not in ['f','c']:
+        print("Invalid input. Please enter 'f' for file or 'c' for console.")
+        choice = input("Would you like to read from file (f) or console (c):").lower()
+    if choice == 'c':
+        message = input("What message would you like to process:").lower()
+        shift = int(input("What is the shift number (1-25):"))
+        while shift < 1 or shift > 25:
+            print("Invalid shift number. Please enter a number between 1 and 25.")
+            shift = int(input("What is the shift number (1-25):"))
+        return mode, message, None, shift
+    elif choice == 'f':
+        filename = input("Enter the filename (with extension):")
+        while not is_file(filename):
+            print("Invalid filename")
+            filename = input("Enter the filename (with extension):")
+        shift = int(input("What is the shift number (1-25):"))
+        while shift < 1 or shift > 25:
+            print("Invalid shift number. Please enter a number between 1 and 25.")
+            shift = int(input("What is the shift number (1-25):"))
+        return mode, None, filename, shift
 def main():# Main function to run the Caesar cipher program
     first_run = True# Variable to track if it's the first run of the program
     while True:# Loop to allow multiple encryptions/decryptions
         if first_run == True:# Display welcome message only on the first run
             welcome()
             first_run = False# Set first_run to False after displaying the welcome message
-        mode, message, shift = enter_message()# Get user inputs for mode, message, and shift number
-        if mode == 'e':# If mode is encryption
-            encrypted_message = encrypt(message, shift)
-            print("Encrypted Message:", encrypted_message.upper())# Display encrypted message in uppercase
-        elif mode == 'd':# If mode is decryption
-            decrypted_message = decrypt(message, shift)
-            print("Decrypted Message:", decrypted_message.upper())# Display decrypted message in uppercase
+        mode, message, filename, shift = message_or_file()# Get user inputs for mode, message, and shift number
+        if message != None:
+            if mode == 'e':# If mode is encryption
+                encrypted_message = encrypt(message, shift)
+                print("Encrypted Message:", encrypted_message.upper())# Display encrypted message in uppercase
+            elif mode == 'd':# If mode is decryption
+                decrypted_message = decrypt(message, shift)
+                print("Decrypted Message:", decrypted_message.upper())# Display decrypted message in uppercase
+        if filename != None:
+            results = file_process(filename,mode,shift)
+            write_message(results)
+            print("Output written to results.txt")
         choice = input("Do you want to continue? (y/n): ").lower()# Ask user if they want to continue
         if choice != 'y':# If user chooses not to continue, exit the program
             print("Exiting program!!!!!")
