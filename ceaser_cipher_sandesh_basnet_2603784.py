@@ -53,7 +53,7 @@ def is_file(filename):# Function to check if a file exists
             return True# If successful, return True
     except:
         return False# If file does not exist, return False
-def file_process(filename, mode, shift):# Function to process messages from a file for encryption or decryption
+def process_file(filename, mode, shift):# Function to process messages from a file for encryption or decryption
     results = []# List to store processed messages
     with open (filename, 'r') as file:# Open the specified file in read mode
         for line in file:# Iterate through each line in the file
@@ -108,7 +108,7 @@ def main():# Main function to run the Caesar cipher program
                 decrypted_message = decrypt(message, shift)# Decrypt the message
                 print("Decrypted Message:", decrypted_message.upper())# Display decrypted message in uppercase
         if filename != None:# If filename is provided (message from file)
-            results = file_process(filename,mode,shift)# Process messages from the file
+            results = process_file(filename,mode,shift)# Process messages from the file
             write_message(results)# Write processed messages to results.txt
             print("Output written to results.txt")# Notify user that output has been written to results.txt
         choice = input("Do you want to continue? (y/n): ").lower()# Ask user if they want to continue
