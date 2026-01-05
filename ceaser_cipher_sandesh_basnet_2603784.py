@@ -1,8 +1,5 @@
-#Author: Sandesh Basnet
-#Student ID: 2603784
-#Github: @Sandesh-Basnet
-#TryHackMe: @Kastra
-#LinkedIn : @sanddyy
+'''Author: Sandesh Basnet
+Student ID: 2603784'''
 def welcome():# Function to display a welcome message
     print("Welcome to the Caesar Cipher Program!")
     print("This program allows you to encrypt and decrypt messages using the Caesar cipher technique.")
